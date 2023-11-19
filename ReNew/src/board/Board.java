@@ -1,7 +1,5 @@
 package board;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Calendar;
 
 class BoardCounter{
@@ -28,22 +26,23 @@ public class Board {
 	private String boardTitle, boardContent, writer, writenDate;
 	
 	
-	public Board(String boardTitle,String boardContent,String writer) {
+	public Board(String boardTitle,String boardContent,String writer, String date) {
 		this.boardNum = BoardCounter.getInstance().BoardCount();
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.writer = writer;
-		this.writenDate = Calendar.YEAR+"."+Calendar.MONTH+"."+Calendar.DATE+"_"+Calendar.AM_PM+" "+Calendar.HOUR+":"+Calendar.MINUTE;
+		this.writenDate = date;
 	}
 
 
 	@Override
 	public String toString() {
-		return "게시글 제목 : " + boardTitle + "\r\n" + "게시글번호("+ boardNum +") 작성자 : "+writer+" | 작성일자 : "+ writenDate + "\r\n" + "내용 : " +boardContent;
+		return "[ 게시글 제목 : " + boardTitle.toString() + "]\r\n" + "[게시글번호("+ boardNum +") 작성자 : "+writer+" | 작성일자 : "+ writenDate + "]\r\n" + "[내용 : " +boardContent+"]";
 		
 //		return "Board [boardNum=" + boardNum + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 //				+ ", writer=" + writer + ", writenDate=" + writenDate + "]";
 	}
+
 
 	public int getBoardNum() {
 		return boardNum;
@@ -73,9 +72,16 @@ public class Board {
 		return writer;
 	}
 
+
 	public String getWritenDate() {
 		return writenDate;
 	}
+
+
+	public void setWritenDate(String writenDate) {
+		this.writenDate = writenDate;
+	}
+
 	
 	
 }
