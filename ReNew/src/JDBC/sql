@@ -1,0 +1,67 @@
+// 데이터베이스 생성
+create database javadb;
+
+
+// 유저생성
+ create user 'javaUser'@'localhost' identified by 'mysql';
+
+
+// 유저 권한 부여 구문
+// 해당 유저가 사용할 수 있는 db를 설정
+// 형식 : grant all privileges on [데이터베이스명.테이블명] to [사용자@호스트] identified by '비밀번호' [with grant option];
+
+
+grant all privileges on javadb.* to 'javaUser'@'localhost' with grant option;
+
+
+// 권한 적용
+flush privileges;
+
+
+exit 
+mysql -ujavaUser -pmysql
+// 로그인 전에는 세미콜론 하는거 아님 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+show databases;
+
+
+maven  레파지토리 사이트에서
+mysql connector java .28 버젼 다운
+// 꼭 반디집으로만 해야함
+
+
+1. DB생성
+2. 유저 생성
+
+
+product 테이블 생성
+pno : 제품등록번호 // ai, pk
+pname : 제품명  // varchar(200)
+price : 가격  // int
+regdate : 등록일자 // datetime default now()
+madeby : 설명 
+
+
+create table product(
+pno int not null auto_increment,
+pname varchar(200) not null,
+price int not null default 0,
+regdate datetime default now(),
+madeby text,
+primary key(pno));
+
+
+라이브러리 추가 
+maven repogiroty  => ( https://mvnrepository.com/ )
+mysql connector java 8.0.28 버젼 다운
+
+
+패키지 생성
+product 객체 생성 파일
+// 위에 생성한 db 타입과 다 일치해야함
+
+
+// MVN 패턴으로 규격화되어 있는 모델로 반드시 숙지
+VO(Value Object) : 실제 데이터를 입력할 객체 (Product 객체가 VO에 해당)
+Controller : 전체적인 제어를 담당 (화면과 service를 연결)
+Service : 다른 DB에 접속해야 할 때 (controller로 가는 완벽한 객체를 생성하는 역할 [ Service <-> DAO ])
+DAO : DB와 실제 접속하는 객체(Data acceces Object)
