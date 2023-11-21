@@ -1,0 +1,41 @@
+[board]
+
+// 데이터베이스 생성
+create database javadb;
+
+// 유저 생성
+create user 'javaUser'@'localhost' identified by 'mysql';
+
+// 유저 권한 부여 구문
+// 해당 유저가 사용할 수 있는 db를 설정
+// 형식 : grant all privileges on [데이터베이스명.테이블명] to [사용자@호스트] identified by '비밀번호' [with grant option];
+grant all privileges on javadb.* to 'javaUser'@'localhost' with grant option;
+
+
+// 권한 적용
+flush privileges;
+
+- 설계
+bno int ai : 번호
+title : 제목
+writer : 작성자
+content : 내용
+regdate : 작성일
+moddate : 수정일
+
+- 작성 구문
+create table Borad (
+bno int auto_increment,
+title varchar(200) not null,
+writer varchar(100) not null,
+content text,
+regdate datetime default now(),
+moddate datetime default now(),
+primary key(bno));
+
+// readcount 추가 (db추가 구문으로 추가)
+// readcount는 detail 페이지를 선택하면 1씩 증가
+board 테이블에 readcount를 추가하고, derail 선택시 1씩 증가되게 설정 list/detail 표시될때 같이 콘솔에 출력
+
+- 속성 추가 구문
+alter table board add readcount int default 0;
