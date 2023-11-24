@@ -5,7 +5,7 @@ public class BoardVO {
 	private int bno;
 	private String title;
 	private String writer;
-	private String contetn;
+	private String content;
 	private String regdate;
 	private String moddate;
 	private int readCount;
@@ -14,11 +14,11 @@ public class BoardVO {
 
 	
 	// insert : title, writer, content
-	public BoardVO(String title, String writer, String contetn) {
+	public BoardVO(String title, String writer, String content) {
 		super();
 		this.title = title;
 		this.writer = writer;
-		this.contetn = contetn;
+		this.content = content;
 	}
 	
 	// list : bno, title, writer, regdate, readCount
@@ -32,21 +32,21 @@ public class BoardVO {
 	}
 
 	// update : bno, title, content
-	public BoardVO(int bno, String title, String contetn) {
+	public BoardVO(int bno, String title, String content) {
 		super();
 		this.bno = bno;
 		this.title = title;
-		this.contetn = contetn;
+		this.content = content;
 	}
 	
 	// detail : all
-	public BoardVO(int bno, String title, String writer, String contetn, String regdate, String moddate,
+	public BoardVO(int bno, String title, String writer, String content, String regdate, String moddate,
 			int readCount) {
 		super();
 		this.bno = bno;
 		this.title = title;
 		this.writer = writer;
-		this.contetn = contetn;
+		this.content = content;
 		this.regdate = regdate;
 		this.moddate = moddate;
 		this.readCount = readCount;
@@ -55,7 +55,7 @@ public class BoardVO {
 	// toString
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", contetn=" + contetn + ", regdate="
+		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", contetn=" + content + ", regdate="
 				+ regdate + ", moddate=" + moddate + ", readCount=" + readCount + "]";
 	}
 
@@ -93,13 +93,13 @@ public class BoardVO {
 	}
 	
 	
-	public String getContetn() {
-		return contetn;
+	public String getContent() {
+		return content;
 	}
 	
 	
-	public void setContetn(String contetn) {
-		this.contetn = contetn;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 	

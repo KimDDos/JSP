@@ -19,6 +19,6 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="mapper 경로 설정 예정...."/>
+    <mapper resource="mapper/boardMapper.xml"/>
   </mappers>
 </configuration>
