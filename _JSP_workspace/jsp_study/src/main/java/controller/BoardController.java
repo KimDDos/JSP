@@ -166,6 +166,22 @@ public class BoardController extends HttpServlet {
 			}
 			
 			break;
+		case "remove":
+			try {
+				int bno = Integer.parseInt(request.getParameter("bno"));
+				isOk = bsv.remove(bno);
+				log.info("remove check 1");
+				log.info(">>>>>>>> edit {}" + bno);
+				
+				log.info("remove >>>>>>>> {}", isOk > 0 ? "Ok":"Fail");
+				
+				destPage = "list";
+				
+			} catch (Exception e) {
+				log.info("Remove Error!");
+				e.printStackTrace();
+			}
+			break;
 		default: break;
 		}
 		

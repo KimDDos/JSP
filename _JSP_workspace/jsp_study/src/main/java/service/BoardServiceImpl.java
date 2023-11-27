@@ -45,5 +45,11 @@ public class BoardServiceImpl implements BoardService {
 		log.info(" >>>> modify check 2 ");
 		return bdao.update(bvo);
 	}
+
+	@Override
+	public int remove(int bno) {
+		log.info(" >>>> remove check 2 ");
+		return bdao.delete(bno);
+	}
 	
 }
