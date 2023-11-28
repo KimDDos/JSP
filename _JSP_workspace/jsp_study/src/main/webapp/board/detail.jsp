@@ -39,8 +39,10 @@
 			<th> <textarea rows="10" cols="20" readonly="readonly">${bvo.content }</textarea></th>
 		</tr>
 	</table>
+	<c:if test="${bvo.writer eq ses.id }">
 	<a href="/brd/modify?bno=${bvo.bno}"><button>Modify</button></a>
 	<a href="/brd/remove?bno=${bvo.bno}"><button>remove</button></a>
+	</c:if>
 	<a href="/brd/list"><button>list</button></a>
 </body>
 </html>

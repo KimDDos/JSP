@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import domain.MemberVO;
 
 public interface MemberService {
@@ -9,6 +11,14 @@ public interface MemberService {
 	MemberVO login(MemberVO mvo);
 
 	int lastLogin(String id);
+
+	List<MemberVO> getList();
+
+	int detail(MemberVO mvo);
+
+	int modify(MemberVO mvo);
+
+	int remove(String id);
 
 	
 }
