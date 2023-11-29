@@ -171,11 +171,18 @@ public class MemberController extends HttpServlet {
 			break;
 		case "remove":
 			try {
-				String id = request.getParameter("id");
+				// jsp에서 쿼리스트링으로 값을 달고 오는 방법
+				// String id = request.getParameter("id");
+				
+				// session 객체에서 ses 객체를 가져오기
+				// 
+				HttpSession ses = request.getSession();
+				// 현재 로그인된 정보
+				MemberVO mvo = (MemberVO)ses.getAttribute("ses");
+				String id = mvo.getId();
 				
 				log.info("remove check 1");
 				isOk = msv.remove(id);
-				
 				log.info("remove isOk >>>>{}", isOk > 0 ? "Ok":"Fail");
 				
 				if(isOk>0) {
@@ -184,9 +191,7 @@ public class MemberController extends HttpServlet {
 					request.setAttribute("msg_remove", -1);
 				}
 				
-				HttpSession ses = request.getSession(); 
 				ses.invalidate();  // 세션 무효화 (세션 끊기)
-				
 				destPage = "/index.jsp";
 			} catch (Exception e) {
 				log.info("remove Error!");
