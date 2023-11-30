@@ -12,9 +12,9 @@
 		<div class="topheader">
 			<h1>Hello my second dynamic Web Project</h1>
 		</div>
-		<c:if test="${ses.id eq null }">
+		<c:if test="${ses.id eq null}">
 			<div class="header-login">
-				<form action="/#">
+				<form action="/memb/login">
 					<div class="login">ID : <input type="text" name="id" placeholder="ID를 입력해주세요."></div>
 					<div class="Password">PW : <input type="text" name="pwd" placeholder="Password를 입력해주세요."></div>
 					<button type="submit">Login</button>
@@ -22,23 +22,29 @@
 				<a href="/memb/join"><button>회원가입</button></a>
 			</div>
 		</c:if>
-		<c:if test="${ses.id ne null }">
+		<c:if test="${ses.id ne null}">
 			<div class="header-login">
 				${ses.id }님이 login 하셧습니다. <br>
 				계정생성일 : ${ses.regdate } <br>
 				마지막 접속 : ${ses.lastlogin } <br>
-				<a href="/memb/detail"><button>회원정보수정</button></a>
+				<a href="/memb/detail?id=${ses.id }"><button>회원정보수정</button></a>
 				<a href="/memb/list"><button>회원리스트</button></a>
-				<a href="/memb/logout"><button>로그아웃</button></a><br>
+				<a href="/brd/myboard"><button>내가 쓴 글</button></a>
+				<a href="/memb/logout?id=${ses.id }"><button>로그아웃</button></a><br>
 			</div>
 		</c:if>
 	</header>
-	<hr>
+	<hr> 
 
 	<div class="container">
 		<div class="leftside">
-			<a href="/brd/list"><button>게시글 보기</button></a>
-			<a href="/brd/register"><button>게시글 작성</button></a>
+			<c:if test="${ses.id ne null}">
+				<a href="/brd/list"><button>게시글 보기</button></a>
+				<a href="/brd/register"><button>게시글 작성</button></a>
+			</c:if>
+			<c:if test="${ses.id eq null}">
+				<a href="/brd/list"><button>게시글 보기</button></a>
+			</c:if>
 		</div>
 		<hr>
 		<div class="rightside">
@@ -73,6 +79,9 @@
 		
 		const msg_login = `<c:out value="${msg_login}"/>`;
 		if(msg_login == '-1'){alert('로그인 실패, 계정정보가 일치하지 않습니다!')}
+		
+		const msg_logout = `<c:out value="${msg_logout}"/>`;
+		if(msg_logout == '1'){alert('로그아웃 성공!')}
 	</script>
 	
 </body>

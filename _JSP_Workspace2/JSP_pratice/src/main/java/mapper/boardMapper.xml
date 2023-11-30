@@ -17,7 +17,7 @@
 	</select>
 
 	<update id="read" parameterType="bvo">
-		update board set readcount = readcount + 1 where bno=${bno}
+		update board set readcount = readcount + 1 where bno=#{bno}
 	</update>
 	
 	<update id="modify" parameterType="bvo">

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -72,6 +73,9 @@ public class MemberController extends HttpServlet {
 				MemberVO mvo = new MemberVO(id, pwd);
 				MemberVO loginvo = msv.login(mvo);
 				
+				log.info("mvo >>>> {}",mvo);
+				log.info("loginvo >>>> {}",loginvo);
+				
 				if(loginvo != null) {
 					HttpSession ses = request.getSession();
 					ses.setAttribute("ses", loginvo);
@@ -82,6 +86,73 @@ public class MemberController extends HttpServlet {
 				destPage = "/index.jsp";
 			} catch (Exception e) {
 				log.info("login Error!");
+				e.printStackTrace();
+			}
+			break;
+		case "logout":
+			try {
+				HttpSession ses = request.getSession();
+				MemberVO mvo = (MemberVO)ses.getAttribute("ses");
+				String id = mvo.getId();
+				log.info("test1 >>> {}",id);
+				log.info("test2 >>> {}",ses.getId());
+				isOk = msv.lastloginupdate(id); 
+				log.info("logout result >>> {}",isOk > 0 ? "Ok":"Fail");
+				ses.setAttribute("msg_logout", 1);
+				ses.invalidate();
+				destPage = "/index.jsp";
+			} catch (Exception e) {
+				log.info("logout Error!");
+				e.printStackTrace();
+			}
+			break;
+		case "list":
+			try {
+				HttpSession ses = request.getSession();
+				List <MemberVO> list = msv.getList();
+				request.setAttribute("list", list);
+				destPage = "/member/list.jsp";
+			} catch (Exception e) {
+				log.info("member list Error!");
+				e.printStackTrace();
+			}
+			break;
+		case "detail":
+			try {
+				HttpSession ses = request.getSession();
+				destPage = "/member/detail.jsp";
+			} catch (Exception e) {
+				log.info("detail list Error!");
+				e.printStackTrace();
+			}
+			break;
+		case "modify":
+			try {
+				String id = request.getParameter("id");
+				String pwd = request.getParameter("pwd");
+				String email = request.getParameter("email");
+				int age = Integer.parseInt(request.getParameter("age"));
+				
+				MemberVO mvo = new MemberVO(id, pwd, email, age);
+				log.info("mvo >>>> {}", mvo);
+				isOk = msv.modify(mvo);
+				log.info("modify result >>>> {}", isOk > 0 ? "Ok":"Fail");
+				destPage = "/index.jsp";
+			} catch (Exception e) {
+				log.info("member modify Error!");
+				e.printStackTrace();
+			}
+			break;
+		case "signout":
+			try {
+				String id = request.getParameter("id");
+				isOk = msv.remove(id);
+				log.info("remove result >>>> {}",isOk > 0 ? "Ok":"Fail");
+				HttpSession ses = request.getSession();
+				ses.invalidate();
+				destPage = "/index.jsp";
+			} catch (Exception e) {
+				log.info("signout Error!");
 				e.printStackTrace();
 			}
 			break;

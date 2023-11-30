@@ -9,11 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.MemberVO;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -50,6 +52,7 @@ public class BoardController extends HttpServlet {
 			break;
 		case "insert":
 			try {
+				HttpSession ses = request.getSession();
 				String title = request.getParameter("title");
 				String writer = request.getParameter("writer");
 				String content = request.getParameter("content");
@@ -75,6 +78,7 @@ public class BoardController extends HttpServlet {
 			break;
 		case "list":
 			try {
+				HttpSession ses = request.getSession();
 				List<BoardVO> list = bsv.getlist();
 				log.info("getlist >>>>>> {}",list);
 				
@@ -88,6 +92,7 @@ public class BoardController extends HttpServlet {
 			break;
 		case "detail":
 			try {
+				HttpSession ses = request.getSession();
 				int bno = Integer.parseInt(request.getParameter("bno"));
 				isOk = bsv.readcount(bno);
 				log.info("readCount result >>>> {}", isOk > 0 ? "Ok":"Fail");
@@ -101,6 +106,7 @@ public class BoardController extends HttpServlet {
 			break;
 		case "modify":
 			try {
+				HttpSession ses = request.getSession();
 				int bno = Integer.parseInt(request.getParameter("bno"));
 				BoardVO bvo = bsv.detail(bno);
 				request.setAttribute("bvo", bvo);
@@ -150,6 +156,19 @@ public class BoardController extends HttpServlet {
 				destPage = "/index.jsp";
 			} catch (Exception e) {
 				log.info("remove Error!");
+				e.printStackTrace();
+			}
+			break;
+		case "myboard":
+			try {
+				HttpSession ses = request.getSession();
+				MemberVO mvo = (MemberVO)ses.getAttribute("ses");
+				
+				isOk = bsv.getMylist(mvo.getId());
+				
+				destPage = "/board/myboard.jsp";
+			} catch (Exception e) {
+				log.info("myboard Error!");
 				e.printStackTrace();
 			}
 			break;

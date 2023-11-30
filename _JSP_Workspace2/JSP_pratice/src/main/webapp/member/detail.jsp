@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,35 +33,32 @@
 			</div>
 		</c:if>
 	</header>
-	<hr>
+	<hr> 
 
 	<div class="container">
 		<div class="leftside">
-			<a href="/brd/list"><button>게시글 보기</button></a>
-			<a href="/brd/register"><button>게시글 작성</button></a>
+			<c:if test="${ses.id ne null}">
+				<a href="/brd/list"><button>게시글 보기</button></a>
+				<a href="/brd/register"><button>게시글 작성</button></a>
+			</c:if>
+			<c:if test="${ses.id eq null}">
+				<a href="/brd/list"><button>게시글 보기</button></a>
+			</c:if>
 		</div>
 		<hr>
 		<div class="rightside">
-			<table border="1">
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-				<c:forEach items="${list }" var="bvo">
-					<tr>
-						<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.bno }</a></td>
-						<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.title }</a></td>
-						<td>${bvo.writer }</td>
-						<td>${bvo.moddate }</td>
-						<td>${bvo.readCount}</td>
-					</tr>
-				</c:forEach>
-			</table>
+			<p>회원정보를 수정해주세요.</p>
+			<form action="/memb/modify">
+				ID : <input type="text" name="id" value="${ses.id }" readonly="readonly"> <br>
+				PW : <input type="text" name="pwd" value="${ses.pwd }"> <br>
+				E-Mail : <input type="text" name="email" value="${ses.email }"><br>
+				나이 : <input type="text" name="age" value="${ses.age }"><br>
+				가입일 : <input type="text" name="regdate" value="${ses.regdate }" readonly="readonly"><br>
+				마지막 접속일 : <input type="text" name="lastlogin" value="${ses.lastlogin }" readonly="readonly"><br>
+				<button type="submit">수정</button>
+			</form>
+				<a href="/memb/signout?id=${ses.id }"><button>회원탈퇴하기</button></a>
 		</div>
 	</div>	
-	
 </body>
 </html>

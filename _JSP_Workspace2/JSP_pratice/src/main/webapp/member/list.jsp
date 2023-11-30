@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>list page</title>
 </head>
 <body>
 	<header>
@@ -27,36 +27,43 @@
 				${ses.id }님이 login 하셧습니다. <br>
 				계정생성일 : ${ses.regdate } <br>
 				마지막 접속 : ${ses.lastlogin } <br>
-				<a href="/memb/detail?id=${ses.id }"><button>회원정보수정</button></a>
+				<a href="/memb/detail"><button>회원정보수정</button></a>
 				<a href="/memb/list"><button>회원리스트</button></a>
-				<a href="/memb/logout?id=${ses.id }"><button>로그아웃</button></a><br>
+				<a href="/memb/logout"><button>로그아웃</button></a><br>
 			</div>
 		</c:if>
 	</header>
-	<hr>
+	<hr> 
 
 	<div class="container">
 		<div class="leftside">
-			<a href="/brd/list"><button>게시글 보기</button></a>
-			<a href="/brd/register"><button>게시글 작성</button></a>
+			<c:if test="${ses.id ne null}">
+				<a href="/brd/list"><button>게시글 보기</button></a>
+				<a href="/brd/register"><button>게시글 작성</button></a>
+			</c:if>
+			<c:if test="${ses.id eq null}">
+				<a href="/brd/list"><button>게시글 보기</button></a>
+			</c:if>
 		</div>
 		<hr>
 		<div class="rightside">
 			<table border="1">
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th>ID</th>
+					<th>PW</th>
+					<th>Email</th>
+					<th>age</th>
+					<th>regdate</th>
+					<th>lastlogin</th>
 				</tr>
-				<c:forEach items="${list }" var="bvo">
+				<c:forEach items="${list }" var="mvo">
 					<tr>
-						<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.bno }</a></td>
-						<td><a href="/brd/detail?bno=${bvo.bno }">${bvo.title }</a></td>
-						<td>${bvo.writer }</td>
-						<td>${bvo.moddate }</td>
-						<td>${bvo.readCount}</td>
+						<td>${mvo.id }</td>
+						<td>${mvo.pwd }</td>
+						<td>${mvo.email }</td>
+						<td>${mvo.age }</td>
+						<td>${mvo.regdate }</td>
+						<td>${mvo.lastlogin }</td>
 					</tr>
 				</c:forEach>
 			</table>
