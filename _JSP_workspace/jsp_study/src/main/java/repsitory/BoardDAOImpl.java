@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.PagingVO;
 import orm.DatabaseBuilder;
 
 public class BoardDAOImpl implements BoardDAO {
@@ -38,9 +39,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectList() {
+	public List<BoardVO> selectList(PagingVO pgvo) {
 		log.info(">>>>> list check 3");
-		return sql.selectList("BoardMapper.list");
+		return sql.selectList("BoardMapper.list", pgvo);
 	}
 
 	@Override
@@ -71,6 +72,13 @@ public class BoardDAOImpl implements BoardDAO {
 		int isOk = sql.delete("BoardMapper.del", bno);
 		if(isOk > 0) {sql.commit();}
 		return isOk;
+	}
+
+	@Override
+	public int boardCount() {
+		return sql.selectOne("BoardMapper.total");
+		// count(*) 을 하면 DB 성능저하가 초래될 수도 있고, 
+		// title이 null이거나 할때 값이 포함되지 않을수도 있음
 	}
 	
 }
