@@ -103,12 +103,15 @@ public class BoardController extends HttpServlet {
 				if(request.getParameter("pageNo") != null) {
 					int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 					int qty = Integer.parseInt(request.getParameter("qty"));
-					log.info(">>>> pageNo / qty "+ pageNo + qty );
-					pgvo = new PagingVO(pageNo, qty);
-				}
+					String type = request.getParameter("type");
+					String keyWord = request.getParameter("keyWord");
+					log.info(">>>> pageNo / qty / type / keyWord : "+ pageNo +" / "+ qty +" / "+ type +" / "+ keyWord);
+					pgvo = new PagingVO(pageNo, qty, type, keyWord);
+				} 
+				// 검색한 값의 게시글 카운트
 				
 				List<BoardVO> list = bsv.getList(pgvo);
-				int totalCount = bsv.boardCount();
+				int totalCount = bsv.boardCount(pgvo);
 				PagingHandler ph = new PagingHandler(pgvo, totalCount);
 				
 				// list를 jsp로 전송

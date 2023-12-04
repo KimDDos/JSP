@@ -13,7 +13,9 @@
 	</insert>
 	
 	<select id="list" parameterType="domain.PagingVO" resultType="bvo">  <!-- pgvo mybatisConfig에 추가해서 반영 가능 -->
-		select * from board order by bno desc limit #{pageStart}, #{qty}
+		select * from board 
+		<include refid="search"/>
+		order by bno desc limit #{pageStart}, #{qty}
 	</select>
 	
 	<update id="read" parameterType="bvo">
@@ -32,7 +34,30 @@
 		delete from board where bno = #{bno}
 	</delete>
 	
-	<select id="total" resultType="int">
-		select count(bno) from board
+	<select id="total" parameterType="pgvo" resultType="int">
+		select count(bno) from board <include refid="search"/>
 	</select>
+	
+	<sql id="search">
+		<if test="type != null">
+			<trim prefix="where (" suffix=")" prefixOverrides="or">
+				<foreach collection="typeToArray" item="type">
+					<trim prefix="or">
+						<choose>
+							<when test="type == 't'.toString()">
+								<!-- concat 함수 사용하여 % 붙이기. -->
+								title like concat('%',#{keyword},'%')
+							</when>
+							<when test="type == 'c'.toString()">
+								content like concat('%',#{keyword},'%')
+							</when>
+							<when test="type == 'w'.toString()">
+								writer like concat('%',#{keyword},'%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
+	</sql>
 </mapper>

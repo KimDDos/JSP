@@ -75,8 +75,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int boardCount() {
-		return sql.selectOne("BoardMapper.total");
+	public int boardCount(PagingVO pgvo) {
+		log.info(">>>>> remove check  3");
+		return sql.selectOne("BoardMapper.total", pgvo);
 		// count(*) 을 하면 DB 성능저하가 초래될 수도 있고, 
 		// title이 null이거나 할때 값이 포함되지 않을수도 있음
 	}

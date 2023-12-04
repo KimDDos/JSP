@@ -10,3 +10,14 @@ CREATE TABLE `board` (
   `readcount` int DEFAULT '0',
   PRIMARY KEY (`bno`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+
+-- 2023-12-04  -- 
+create table comment(
+cno int auto_increment,
+bno int not null,
+writer varchar(100) default "unkmown",
+content varchar(1000) not null,
+regdate datetime default now(),
+primary key(cno));
