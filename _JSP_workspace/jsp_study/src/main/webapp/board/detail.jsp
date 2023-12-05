@@ -53,16 +53,26 @@
 		<input type="text" id="cmtText" placeholder="Add comment...">
 		<button type="button" id="cmtAddBtn">댓글등록</button>
 	</div>
-	
+	<hr>
 	<!-- 댓글 표시 라인 -->
 	<div id="commentLine">
-		<div>cno, bno, writer</div>
-		<div>content regdate</div>	
+		
+		<div>
+			<div>cno, bno, writer, regdate</div>
+			<div>
+				<button>수정</button> <button>삭제</button>
+				<input name="content"> 
+			</div>
+		</div>
+			
 	</div>
 	<script type="text/javascript">
 		const bnoVal = `<c:out value="${bvo.bno}"/>`;
 		console.log(bnoVal);
 	</script>
 	<script src="/resources/board_detail.js"></script>
+	<script type="text/javascript">
+		printCommentList(bnoVal);
+	</script>
 </body>
 </html>
