@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -40,6 +41,8 @@ public class CommentController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		// contentType은 jsp 화면으로 갈때 설정 => 비동기식에서는 설정 안 함 !!
+		HttpSession ses = request.getSession();
+		ses.setAttribute("ses", ses);
 		String uri = request.getRequestURI();  // cmt/post, /cmt/list/370
 		log.info("경로 >>>> {}", uri);
 		String pathUri = uri.substring("/cmt/".length());  // post, list/370
@@ -123,7 +126,31 @@ public class CommentController extends HttpServlet {
 			break;
 		case "modify":
 			try {
+				StringBuffer sb = new StringBuffer();
+				String line = "";
+				BufferedReader br = request.getReader();
+				while((line = br.readLine()) != null) {
+					sb.append(line);
+				}
+				log.info("sb >>>> " + sb.toString());
+				// 객체로 생성
+				JSONParser parser = new JSONParser();
+				JSONObject jsonObj = (JSONObject)parser.parse(sb.toString());
+				// key : value 값으로 변환됨
 				
+				// key를 이용하여 value를 추출
+				int cno = Integer.parseInt(jsonObj.get("cno").toString());
+				String content = jsonObj.get("content").toString();
+//				
+				CommentVO cvo = new CommentVO(cno, content);
+				log.info("cvo >>>>> {}", cvo);
+				
+				isOk = csv.modify(cvo);
+				log.info("modify result >>>>> {}", isOk > 0 ? "Ok":"Fail");
+				
+				PrintWriter out = response.getWriter();
+				out.print(isOk);
+//				
 			} catch (Exception e) {
 				log.info("modify Error!");
 				e.printStackTrace();

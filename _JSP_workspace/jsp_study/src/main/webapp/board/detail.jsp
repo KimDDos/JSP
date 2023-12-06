@@ -68,6 +68,7 @@
 	</div>
 	<script type="text/javascript">
 		const bnoVal = `<c:out value="${bvo.bno}"/>`;
+		const userLoginInfo = `<c:out value="${ses.id}"/>`;
 		console.log(bnoVal);
 	</script>
 	<script src="/resources/board_detail.js"></script>

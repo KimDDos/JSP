@@ -32,9 +32,11 @@ function spreadCommemtList(result) { // result => 댓글 리스트
     let html = `<div>`;
     html += `<div>${result[i].cno}, ${result[i].bno}, ${result[i].writer}, ${result[i].regdate}</div>`;
     html += `<div>`;
-    html += `<input type="text" value="${result[i].content}">`;
-    html += `<button type="button" data-cno="${result[i].cno}" class="cmtModBtn">수정</button>`;
-    html += `<button type="button" data-cno="${result[i].cno}" class="cmtDelBtn">삭제</button>`;
+    html += `<input type="text" class="cmtText" value="${result[i].content}">`;
+    if (result[i].writer == userLoginInfo) {
+      html += `<button type="button" data-cno="${result[i].cno}" class="cmtModBtn">수정</button>`;
+      html += `<button type="button" data-cno="${result[i].cno}" class="cmtDelBtn">삭제</button>`;
+    }
     html += `</div></div><br>`;
     html += `<hr>`;
     div.innerHTML += html;  // 각 댓글 객체를 누적해서 담기
@@ -91,7 +93,6 @@ async function postCommentToServer(cmtData) {
   }
 }
 
-
 // 수정 : cno, content  =>  result isOk
 async function updateCommentFromServer(cnoVal, cmtText) {
   try {
@@ -126,13 +127,29 @@ async function removeCommentFromServer(cnoVal) {
 
 document.addEventListener('click', (e) => {
   console.log(e.target);
-  // 삭제버튼이 클리되면... 수정버튼이 클릭되면...
+  // 삭제버튼이 클리되면...
   if (e.target.classList.contains('cmtDelBtn')) {
     let cnoVal = e.target.dataset.cno;
     console.log(cnoVal);
     removeCommentFromServer(cnoVal).then(result => {
       if (result > 0) {
         alert('댓글 삭제 성공!');
+        printCommentList(bnoVal);
+      }
+    })
+  }
+  // 수정버튼이 클릭되면...
+  if (e.target.classList.contains('cmtModBtn')) {
+    let cnoVal = e.target.dataset.cno;
+    console.log(cnoVal);
+    let div = e.target.closest('div');
+    // 타겟을 기준으로 가장 가까운 div 찾기
+    console.log(div);
+    let cmtText = div.querySelector('.cmtText').value;
+    console.log(cmtText);
+    updateCommentFromServer(cnoVal, cmtText).then(result => {
+      if (result > 0) {
+        alert('댓글 수정 성공!');
         printCommentList(bnoVal);
       }
     })

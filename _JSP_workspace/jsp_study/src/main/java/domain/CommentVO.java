@@ -19,7 +19,7 @@ public class CommentVO {
 	
 	// modify : cno, content
 	public CommentVO(int cno, String content) {
-		this.bno = cno;
+		this.cno = cno;
 		this.content = content;
 	}
 

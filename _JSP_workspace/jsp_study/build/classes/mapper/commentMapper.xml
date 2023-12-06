@@ -8,11 +8,15 @@
 	</insert>
 
 	<select id="list" resultType="cvo">
-		select * from comment where bno=#{bno}
+		select * from comment where bno=#{bno} order by cno desc
 	</select>
 
 	<delete id="del">
 		delete from comment where cno = #{cno}
 	</delete>
+	
+	<update id="up">
+		update comment set content=#{content} regdate=now() where cno=#{cno}
+	</update>
 
 </mapper>

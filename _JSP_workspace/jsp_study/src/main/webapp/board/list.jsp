@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>list page</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<h1> list </h1>
@@ -14,7 +16,7 @@
 	<div>
 		<form action="/brd/list" method="get">
 			<c:set value="${ph.pgvo.type }" var="typed"/>
-				<select name="type">
+				<select class="form-select" name="type">
 					<!-- selected : 화면이 리로드되어도 그 벨류값이 선택된채로 나옴 -->
 					<option ${typed == null ? 'selected':''}>choose....</option>
 					<option value="t" ${typed eq 't' ? 'selected':''}>title</option>
@@ -34,7 +36,7 @@
 		<br>
 	</div>
 	
-	<table border="1">
+	<table class="table table-hover">
 		<tr>
 			<th>bno</th>
 			<th>title</th>
