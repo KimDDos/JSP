@@ -47,8 +47,16 @@
 		<!-- DB에서 가져온 리스트를 c:foreach를 통해 반복 -->
 		<c:forEach items="${list }" var="bvo">
 			<tr>
-				<td><a href="/brd/detail?bno=${bvo.bno}">${bvo.bno }</a></td>
-				<td><a href="/brd/detail?bno=${bvo.bno}">${bvo.title }</a></td>
+				<td>
+					<a href="/brd/detail?bno=${bvo.bno}">${bvo.bno }</a>
+				</td>
+				<td>
+					<a href="/brd/detail?bno=${bvo.bno}">
+					<c:if test="${bvo.imageFile ne null }">
+						<img alt="" src="/_fileUpload/_th_${bvo.imageFile}">
+					</c:if>
+					${bvo.title }</a>
+				</td>
 				<td>${bvo.writer }</td>
 				<td>${bvo.regdate }</td>
 				<td>${bvo.readCount }</td>
@@ -73,7 +81,7 @@
 	</div>
 	
 	<br>
-	<a href="/brd/register.jsp"><button type="button">register</button></a>
+	<a href="/brd/register"><button type="button">register</button></a>
 	<a href="/index.jsp"><button type="button">index</button></a>
 </body>
 </html>

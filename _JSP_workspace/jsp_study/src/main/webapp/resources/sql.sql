@@ -21,3 +21,8 @@ writer varchar(100) default "unkmown",
 content varchar(1000) not null,
 regdate datetime default now(),
 primary key(cno));
+
+
+
+-- 2023-12-07  -- 
+alter table board add imageFile varchar(100);

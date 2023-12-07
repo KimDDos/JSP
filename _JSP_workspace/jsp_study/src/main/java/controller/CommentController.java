@@ -41,8 +41,6 @@ public class CommentController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		// contentType은 jsp 화면으로 갈때 설정 => 비동기식에서는 설정 안 함 !!
-		HttpSession ses = request.getSession();
-		ses.setAttribute("ses", ses);
 		String uri = request.getRequestURI();  // cmt/post, /cmt/list/370
 		log.info("경로 >>>> {}", uri);
 		String pathUri = uri.substring("/cmt/".length());  // post, list/370

@@ -9,12 +9,13 @@
 </head>
 <body>
 	<h1>Board Register Page</h1>
-	<form action="/brd/insert" method="post">
+	<form action="/brd/insert" method="post" enctype="multipart/form-data">
 		제   목 : <br><input type="text" name="title"> <br>
-		작 성 자 : <br><input type="text" name="writer"> <br>
+		작 성 자 : <br><input type="text" name="writer" value="${ses.id}" readonly="readonly"> <br>
 		내   용 : <br><textarea rows="10" cols="30" name="content"></textarea><br>
+		첨 부 파 일 : <input type="file" name="image_file" accept="image/png, image/jpg, image/gif, image/jpeg"> 
 		<button type="submit">전송</button><br>
 	</form>
-		<button type="button">리스트로</button>
+		<a href="/brd/list"><button type="button">리스트로</button></a>
 </body>
 </html>

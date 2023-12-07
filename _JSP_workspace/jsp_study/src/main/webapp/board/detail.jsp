@@ -9,6 +9,9 @@
 </head>
 <body>
 	<h1>detail page</h1>
+	<div>
+		<img alt="" src="/_fileUpload/${bvo.imageFile }">
+	</div>
 	<table border="1">
 		<tr>
 			<th>게시글번호</th>

@@ -9,11 +9,11 @@ public class BoardVO {
 	private String regdate;
 	private String moddate;
 	private int readCount;
+	private String imageFile;
 	
 	public BoardVO() {}
 
-	
-	// insert : title, writer, content
+	// insert : title, writer, content, imageFile
 	public BoardVO(String title, String writer, String content) {
 		super();
 		this.title = title;
@@ -41,7 +41,7 @@ public class BoardVO {
 	
 	// detail : all
 	public BoardVO(int bno, String title, String writer, String content, String regdate, String moddate,
-			int readCount) {
+			int readCount, String imageFile) {
 		super();
 		this.bno = bno;
 		this.title = title;
@@ -50,34 +50,37 @@ public class BoardVO {
 		this.regdate = regdate;
 		this.moddate = moddate;
 		this.readCount = readCount;
+		this.imageFile = imageFile;
 	}
 	
 	// toString
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", contetn=" + content + ", regdate="
-				+ regdate + ", moddate=" + moddate + ", readCount=" + readCount + "]";
+		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
+				+ regdate + ", moddate=" + moddate + ", readCount=" + readCount + ", imageFile=" + imageFile + "]";
 	}
-
-
-
-	// getter / setter
 	
+	// getter / setter
 	public int getBno() {
 		return bno;
 	}
-	
-	
+
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-	
 	
 	public String getTitle() {
 		return title;
 	}
 	
-	
+	public String getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
+	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
