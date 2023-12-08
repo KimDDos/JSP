@@ -38,6 +38,10 @@
 		select count(bno) from board <include refid="search"/>
 	</select>
 	
+	<select id="img" resultType="String">
+		select imageFile from board where bno=#{bno}
+	</select>
+	
 	<sql id="search">
 		<if test="type != null">
 			<trim prefix="where (" suffix=")" prefixOverrides="or">

@@ -58,5 +58,11 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return bdao.boardCount(pgvo);
 	}
+
+	@Override
+	public String searchImage(int bno) {
+		// TODO Auto-generated method stub
+		return bdao.selectImage(bno);
+	}
 	
 }

@@ -18,5 +18,9 @@
 	<update id="up">
 		update comment set content=#{content} regdate=now() where cno=#{cno}
 	</update>
+	
+	<delete id="cmtClear" parameterType="int">
+		delete from comment where bno = #{bno}
+	</delete>
 
 </mapper>

@@ -2,11 +2,9 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +24,8 @@ import handler.PagingHandler;
 import net.coobird.thumbnailator.Thumbnails;
 import service.BoardService;
 import service.BoardServiceImpl;
+import service.CommentService;
+import service.CommentServiceImpl;
 
 /**
  * 화면에 있는 요소들을 받을수 있는 servlet controller임
@@ -46,6 +46,7 @@ public class BoardController extends HttpServlet {
 	
 	// controller <-> service
 	private BoardService bsv;  // interface 생성 / sercive 패키지에
+	private CommentService csv = new CommentServiceImpl();
 	
     public BoardController() {
     	bsv = new BoardServiceImpl();  // class로 생성 bsv를 구현할 객체
@@ -349,12 +350,23 @@ public class BoardController extends HttpServlet {
 		case "remove":
 			try {
 				int bno = Integer.parseInt(request.getParameter("bno"));
+				savePath = getServletContext().getRealPath("/_fileUpload");
+				log.info("저장위치 >>>>>> {}", savePath);
+				String imageFile = bsv.searchImage(bno);
+				
+				// 게시판의 파일 먼저 삭제
+				if(imageFile != null) {
+					FileRemoveHandler frh = new FileRemoveHandler();
+					frh.deleteFile(imageFile, savePath);
+					log.info(">>>>>  imagefile delete success!!  <<<<<");
+				}
+				
+				// 게시판의 댓글들 삭제
+				int isOk = csv.commentDel(bno); 
+				log.info(">>>>> "+isOk+"개 댓글 삭제 완료! <<<<<<");
+				
 				isOk = bsv.remove(bno);
-				log.info("remove check 1");
-				log.info(">>>>>>>> edit {}" + bno);
-				
 				log.info("remove >>>>>>>> {}", isOk > 0 ? "Ok":"Fail");
-				
 				destPage = "list";
 				
 			} catch (Exception e) {

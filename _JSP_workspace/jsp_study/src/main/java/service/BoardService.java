@@ -19,4 +19,6 @@ public interface BoardService {
 
 	int boardCount(PagingVO pgvo);
 
+	String searchImage(int bno);
+
 }

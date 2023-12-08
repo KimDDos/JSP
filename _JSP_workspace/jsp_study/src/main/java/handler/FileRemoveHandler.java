@@ -31,7 +31,7 @@ public class FileRemoveHandler {
 			}
 		}
 		
-		log.info(">>>> remove Ok");
+		log.info(">>>> remove Success!! <<<<");
 		
 		return isDel ? 1 : 0;
 	}

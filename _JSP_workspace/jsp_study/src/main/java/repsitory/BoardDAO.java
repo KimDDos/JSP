@@ -21,4 +21,6 @@ public interface BoardDAO {
 
 	int boardCount(PagingVO pgvo);
 
+	String selectImage(int bno);
+
 }

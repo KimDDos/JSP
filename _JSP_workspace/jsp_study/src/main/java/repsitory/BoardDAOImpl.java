@@ -81,5 +81,10 @@ public class BoardDAOImpl implements BoardDAO {
 		// count(*) 을 하면 DB 성능저하가 초래될 수도 있고, 
 		// title이 null이거나 할때 값이 포함되지 않을수도 있음
 	}
+
+	@Override
+	public String selectImage(int bno) {
+		return sql.selectOne("BoardMapper.img",bno);
+	}
 	
 }
