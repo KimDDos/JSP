@@ -8,6 +8,7 @@ public class BoardVO {
 	private String regdate;
 	private String moddate;
 	private int readCount;
+	private String imageFile;
 	
 	public BoardVO() {}
 
@@ -110,6 +111,14 @@ public class BoardVO {
 
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
+	}
+	
+	public String getImageFile() {
+		return imageFile;
+	}
+	
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
 	}
 	
 }

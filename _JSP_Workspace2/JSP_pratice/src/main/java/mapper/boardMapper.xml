@@ -9,7 +9,9 @@
 	</insert>	
 
 	<select id="All" resultType="bvo">
-		select * from board
+		select * from board 
+		
+		order by bno desc limit #{pageStart}, #{qty}
 	</select>
 	
 	<select id="detail" resultType="bvo">
@@ -27,5 +29,9 @@
 	<delete id="del" parameterType="int">
 		delete from board where bno = #{bno} 
 	</delete>
+	
+	<select id="myboard" resultType="bvo">
+		select * from board where writer = #{id}
+	</select>
 
 </mapper>

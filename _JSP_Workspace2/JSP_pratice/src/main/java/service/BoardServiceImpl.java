@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.PagingVO;
 import repository.BoardDAO;
 import repository.BoardDAOImpl;
 
@@ -25,9 +26,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getlist() {
+	public List<BoardVO> getlist(PagingVO pgvo) {
 		log.info("list check 1");
-		return bdao.selectAll();
+		return bdao.selectAll(pgvo);
 	}
 
 	@Override
@@ -52,6 +53,18 @@ public class BoardServiceImpl implements BoardService {
 	public int remove(int bno) {
 		log.info("remove check 2");
 		return bdao.delete(bno);
+	}
+
+	@Override
+	public List<BoardVO> getMylist(String id) {
+		log.info("getMylist check 2");
+		return bdao.getMylist(id);
+	}
+
+	@Override
+	public int boardCount(PagingVO pgvo) {
+		// TODO Auto-generated method stub
+		return bdao.getTotalCount(pgvo);
 	}
 	
 }

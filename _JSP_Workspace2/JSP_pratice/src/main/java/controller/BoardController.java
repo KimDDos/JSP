@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
 import domain.MemberVO;
+import domain.PagingVO;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -78,8 +79,23 @@ public class BoardController extends HttpServlet {
 			break;
 		case "list":
 			try {
-				HttpSession ses = request.getSession();
-				List<BoardVO> list = bsv.getlist();
+				// index에서 list 버튼을 클릭하면 
+				// 컨트롤러에서 db로 전체 리스트 요청
+				// 전체 리스트를 가지고 list.jsp에 뿌리기 
+				log.info("list check 1");
+				PagingVO pgvo = new PagingVO();
+				
+				if(request.getParameter("pageNo") != null) {
+					int pageNo = Integer.parseInt(request.getParameter("pageNo"));
+					int qty = Integer.parseInt(request.getParameter("qty"));
+					String type = request.getParameter("type");
+					String keyword = request.getParameter("keyword");
+					pgvo = new PagingVO(pageNo, qty, type, keyword);
+				}
+				// 검색한 값의 게시글 카운트
+				
+				List<BoardVO> list = bsv.getlist(pgvo);
+				int totalCount = bsv.boardCount(pgvo);
 				log.info("getlist >>>>>> {}",list);
 				
 				request.setAttribute("list", list);
@@ -164,9 +180,10 @@ public class BoardController extends HttpServlet {
 				HttpSession ses = request.getSession();
 				MemberVO mvo = (MemberVO)ses.getAttribute("ses");
 				
-				isOk = bsv.getMylist(mvo.getId());
+				List<BoardVO> list = bsv.getMylist(mvo.getId());
+				request.setAttribute("list", list);
 				
-				destPage = "/board/myboard.jsp";
+				destPage = "/board/list.jsp";
 			} catch (Exception e) {
 				log.info("myboard Error!");
 				e.printStackTrace();

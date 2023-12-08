@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import domain.BoardVO;
+import domain.PagingVO;
 import orm.DatabaseBuilder;
 
 public class BoardDAOImpl implements BoardDAO {
@@ -29,9 +30,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> selectAll() {
+	public List<BoardVO> selectAll(PagingVO pgvo) {
 		log.info("selectAll check 3");
-		return sql.selectList("BoardMapper.All");
+		return sql.selectList("BoardMapper.All", pgvo);
 	}
 
 	@Override
@@ -62,6 +63,17 @@ public class BoardDAOImpl implements BoardDAO {
 		int isOk = sql.delete("BoardMapper.del", bno);
 		if(isOk > 0) sql.commit();
 		return isOk;
+	}
+
+	@Override
+	public List<BoardVO> getMylist(String id) {
+		log.info("getMylist check 3");
+		return sql.selectList("BoardMapper.myboard",id);
+	}
+	// 현재 여기 작업중, Paging 구현중
+	@Override
+	public int getTotalCount(PagingVO pgvo) {
+		return sql.selectOne("BoardMapper.tot", pgvo);
 	}
 	
 	

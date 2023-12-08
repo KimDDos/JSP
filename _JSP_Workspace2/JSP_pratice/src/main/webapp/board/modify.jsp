@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<header>
@@ -27,9 +29,14 @@
 				${ses.id }님이 login 하셧습니다. <br>
 				계정생성일 : ${ses.regdate } <br>
 				마지막 접속 : ${ses.lastlogin } <br>
-				<a href="/memb/detail?id=${ses.id }"><button>회원정보수정</button></a>
-				<a href="/memb/list"><button>회원리스트</button></a>
-				<a href="/memb/logout?id=${ses.id }"><button>로그아웃</button></a><br>
+				<div class="container text-center">
+					<div class="row row-cols-4">
+					    <div class="col"><a href="/brd/myboard?id=${ses.id }"><button>내가 쓴 글</button></a></div>
+					    <div class="col"><a href="/memb/detail?id=${ses.id }"><button>회원정보수정</button></a></div>
+					    <div class="col"><a href="/memb/list"><button>회원리스트</button></a></div>
+					    <div class="col"><a href="/memb/logout?id=${ses.id }"><button>로그아웃</button></a></div>
+				    </div>
+				</div>
 			</div>
 		</c:if>
 	</header>
