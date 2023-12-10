@@ -70,7 +70,7 @@ public class BoardDAOImpl implements BoardDAO {
 		log.info("getMylist check 3");
 		return sql.selectList("BoardMapper.myboard",id);
 	}
-	// 현재 여기 작업중, Paging 구현중
+	
 	@Override
 	public int getTotalCount(PagingVO pgvo) {
 		return sql.selectOne("BoardMapper.tot", pgvo);

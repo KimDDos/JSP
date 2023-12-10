@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import domain.BoardVO;
 import domain.MemberVO;
 import domain.PagingVO;
+import handler.PagingHandler;
 import service.BoardService;
 import service.BoardServiceImpl;
 
@@ -90,15 +91,18 @@ public class BoardController extends HttpServlet {
 					int qty = Integer.parseInt(request.getParameter("qty"));
 					String type = request.getParameter("type");
 					String keyword = request.getParameter("keyword");
+					log.info(">>>> pageNo / qty / type / keyWord : "+ pageNo +" / "+ qty +" / "+ type +" / "+ keyword);
 					pgvo = new PagingVO(pageNo, qty, type, keyword);
 				}
 				// 검색한 값의 게시글 카운트
 				
 				List<BoardVO> list = bsv.getlist(pgvo);
 				int totalCount = bsv.boardCount(pgvo);
+				PagingHandler ph = new PagingHandler(pgvo, totalCount);
 				log.info("getlist >>>>>> {}",list);
 				
 				request.setAttribute("list", list);
+				request.setAttribute("ph", ph);
 				destPage = "/board/list.jsp";
 				
 			} catch (Exception e) {

@@ -5,12 +5,13 @@
 <mapper namespace="BoardMapper">
 	
 	<insert id="reg" parameterType="bvo">
-		insert into board(title, writer, content) values(#{title},#{writer},#{content}) 	
+		insert into board(title, writer, content) 
+		values(#{title},#{writer},#{content}) 	
 	</insert>	
 
 	<select id="All" resultType="bvo">
 		select * from board 
-		
+		<include refid="search"/>
 		order by bno desc limit #{pageStart}, #{qty}
 	</select>
 	
@@ -33,5 +34,31 @@
 	<select id="myboard" resultType="bvo">
 		select * from board where writer = #{id}
 	</select>
+	
+	<select id="tot" resultType="int">
+		select count(bno) from board <include refid="search"/>
+	</select>
+
+	<sql id="search">
+		<if test="type != null">
+			<trim prefix="where (" suffix=")" prefixOverrides="or">
+				<foreach collection="typeToArray" item="type">
+					<trim prefix="or">
+						<choose>
+							<when test="type == 't'.toString()">
+								title like concat('%',#{keyword},'%')
+							</when>
+							<when test="type == 'w'.toString()">
+								writer like concat('%',#{keyword},'%')
+							</when>
+							<when test="type == 'c'.toString()">
+								content like concat('%',#{keyword},'%')
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
+	</sql>
 
 </mapper>

@@ -33,7 +33,7 @@
 					<div class="header-login">
 						<form action="/memb/login">
 							<div class="login">ID : <input type="text" name="id" placeholder="ID를 입력해주세요."></div>
-							<div class="Password">PW : <input type="text" name="pwd" placeholder="Password를 입력해주세요."></div>
+							<div class="Password">PW : <input type="password" name="pwd" placeholder="Password를 입력해주세요."></div>
 							<button type="submit">Login</button>
 						</form>
 						<a href="/memb/join"><button>회원가입</button></a>

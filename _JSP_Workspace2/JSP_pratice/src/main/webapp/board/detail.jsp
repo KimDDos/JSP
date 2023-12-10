@@ -66,8 +66,6 @@
 		<div class="leftside">
 			<a href="/brd/list"><button>게시글 보기</button></a>
 			<a href="/brd/register"><button>게시글 작성</button></a>
-			<a href="/brd/modify?bno=${bvo.bno }"><button>게시글 수정</button></a>
-			<a href="/brd/remove?bno=${bvo.bno }"><button>게시글 삭제</button></a>
 		</div>
 		<hr>
 		<div class="rightside">
@@ -102,6 +100,37 @@
 				</tr>
 			</table>
 		</div>
-	</div>	
+		<hr>
+		<div>
+			<a href="/brd/modify?bno=${bvo.bno }"><button>게시글 수정</button></a>
+			<a href="/brd/remove?bno=${bvo.bno }"><button>게시글 삭제</button></a>
+		</div>
+		<!-- commentLine -->
+		<hr>
+		<div id="commentLine">
+			<div>
+				<div>cno, bno, writer, regdate</div>
+				<div>
+					<input name="content">
+					<button>수 정</button><button>삭 제</button>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div>
+			Comment Line <br>
+			<input type="text" id="cmtWriter" value="${ses.id }" readonly="readonly"><br>
+			<input type="text" id="cmtText" placeholder="Add comment..." > <br>
+			<button type="button" id="cmtAddBtn">댓글 등록</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const bnoVal = `<c:out value="${bvo.bno}"/>`;
+		console.log(bnoVal);
+	</script>
+	<script src="/js/Board_detail.js"></script>	
+	<script type="text/javascript">
+		printCommentList(bnoVal);
+	</script>
 </body>
 </html>
