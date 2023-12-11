@@ -69,10 +69,11 @@
 		</div>
 		<hr>
 		<div class="rightside">
-			<form action="/brd/insert">
+			<form action="/brd/insert" method="post" enctype="multipart/form-data">
 				제 목 : <br><input type="text" name="title"> <br>
 				작성자 : <br><input type="text" name="writer" value="${ses.id }" readonly="readonly"> <br>
 				내 용 : <br><textarea name="content" rows="10" cols="30"></textarea><br>
+				첨부파일 : <br><input type="file" name="imageFile" accept="image/png, image/gif, image/jpg, image/jpeg">
 				<button type="submit">작성</button>
 			</form>
 		</div>

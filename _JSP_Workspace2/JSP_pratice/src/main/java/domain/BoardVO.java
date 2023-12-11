@@ -51,12 +51,6 @@ public class BoardVO {
 		this.readCount = readCount;
 	}
 
-	@Override
-	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
-				+ regdate + ", moddate=" + moddate + ", readCount=" + readCount + "]";
-	}
-
 	public int getBno() {
 		return bno;
 	}
@@ -119,6 +113,12 @@ public class BoardVO {
 	
 	public void setImageFile(String imageFile) {
 		this.imageFile = imageFile;
+	}
+
+	@Override
+	public String toString() {
+		return "BoardVO [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + ", regdate="
+				+ regdate + ", moddate=" + moddate + ", readCount=" + readCount + ", imageFile=" + imageFile + "]";
 	}
 	
 }

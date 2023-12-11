@@ -5,8 +5,8 @@
 <mapper namespace="BoardMapper">
 	
 	<insert id="reg" parameterType="bvo">
-		insert into board(title, writer, content) 
-		values(#{title},#{writer},#{content}) 	
+		insert into board(title, writer, content, imageFile) 
+		values(#{title},#{writer},#{content}, #{imageFile}) 	
 	</insert>	
 
 	<select id="All" resultType="bvo">
@@ -24,7 +24,7 @@
 	</update>
 	
 	<update id="modify" parameterType="bvo">
-		update board set title=#{title}, content=#{content} where bno=#{bno}
+		update board set title=#{title}, content=#{content}, imageFile=#{imageFile}, moddate=now() where bno=#{bno}
 	</update>
 	
 	<delete id="del" parameterType="int">

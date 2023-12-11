@@ -84,7 +84,9 @@
 				<c:forEach items="${list }" var="bvo">
 					<tr>
 						<td class="table-light"><a href="/brd/detail?bno=${bvo.bno }">${bvo.bno }</a></td>
-						<td class="table-light"><a href="/brd/detail?bno=${bvo.bno }">${bvo.title }</a></td>
+						<td class="table-light"><a href="/brd/detail?bno=${bvo.bno }">
+						<img alt="" src="/_fileUpload/_th_${bvo.imageFile }">
+						${bvo.title }</a></td>
 						<td class="table-light">${bvo.writer }</td>
 						<td class="table-light">${bvo.moddate }</td>
 						<td class="table-light">${bvo.readCount}</td>

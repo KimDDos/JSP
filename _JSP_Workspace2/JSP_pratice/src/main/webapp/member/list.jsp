@@ -74,7 +74,7 @@
 		</div>
 		<hr>
 		<div class="rightside">
-			<table border="1">
+			<table class="table table-hover table-primary">
 				<tr>
 					<th>ID</th>
 					<th>PW</th>

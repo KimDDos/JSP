@@ -69,6 +69,9 @@
 		</div>
 		<hr>
 		<div class="rightside">
+			<div>
+				<img alt="" src="/_fileUpload/${bvo.imageFile}">
+			</div>
 			<table border="1">
 				<tr>
 					<th>게시글번호</th>

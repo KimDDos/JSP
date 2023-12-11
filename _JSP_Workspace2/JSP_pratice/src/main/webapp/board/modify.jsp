@@ -49,35 +49,42 @@
 		</div>
 		<hr>
 		<div class="rightside">
-			<form action="/brd/modifyDetail">
-				<table border="1">
-					<tr>
+			<form action="/brd/modifyDetail" method="post" enctype="multipart/form-data">
+				<table class="table-primary">
+					<tr class="table-active">
 						<th>게시글번호</th>
-						<th><input type="text" name="bno" value="${bvo.bno }" readonly="readonly"></th>
+						<td><input type="text" name="bno" value="${bvo.bno }" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>제목</th>
-						<th><input type="text" name="title" value="${bvo.title }"></th>
+						<td><input type="text" name="title" value="${bvo.title }"></td>
 					</tr>
 					<tr>
 						<th>작성자</th>
-						<th><input type="text" name="writer" value="${bvo.writer }" readonly="readonly"></th>
+						<td><input type="text" name="writer" value="${bvo.writer }" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>작성일</th>
-						<th><input type="text" name="regdate" value="${bvo.regdate }" readonly="readonly"></th>
+						<td><input type="text" name="regdate" value="${bvo.regdate }" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>수정일</th>
-						<th><input type="text" name="moddate" value="${bvo.moddate }" readonly="readonly"></th>
+						<td><input type="text" name="moddate" value="${bvo.moddate }" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>조회수</th>
-						<th><input type="text" name="readCount" value="${bvo.readCount }" readonly="readonly"></th>
+						<td><input type="text" name="readCount" value="${bvo.readCount }" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<th>내용</th>
-						<th> <textarea name="content" rows="10" cols="20">${bvo.content }</textarea></th>
+						<td> <textarea name="content" rows="10" cols="20">${bvo.content }</textarea></td>
+					</tr>
+					<tr>
+						<th>사진</th>
+						<td>
+							<input type="hidden" name="imageFile" value="${bvo.imageFile }">
+							<input type="file" name="new_file" accept="imgae/png, imgae/jpg, imgae/gif, imgae/jpeg">
+						</td>
 					</tr>
 				</table>
 				<button type="submit">수정하기</button>
